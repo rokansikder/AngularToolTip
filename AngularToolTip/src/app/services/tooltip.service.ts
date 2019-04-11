@@ -25,6 +25,7 @@ export class TooltipService {
         console.log(e);
       }      
       this.buttonRef.tooltip = null;
+      this.setValue(null);
     }
   }
 }
