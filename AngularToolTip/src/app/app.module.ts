@@ -3,14 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TooltipDirective } from './directive/tooltip.directive';
+import {GlobalModule} from './global/global.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GlobalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
