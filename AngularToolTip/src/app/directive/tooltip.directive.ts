@@ -26,7 +26,31 @@ export class TooltipDirective {
     }
   }
 
+  @HostListener('window:scroll', ['$event.target'])
+  public onScroll(target){    
+    console.log('scroll');
+    if(this.tooltip){
+      
+      let tooltipPosition = this.tooltip.getBoundingClientRect();
+      let elementRect = this.el.nativeElement.getBoundingClientRect();
+
+      if(tooltipPosition.top < 0 && this.placement != "bottom"){
+          this.placement = "bottom";
+          this.setPosition();
+          this.changeTooltipClass('top');
+      }
+      else if(tooltipPosition.height  < elementRect.top && this.placement != "top"){
+          this.placement = "top";
+          this.setPosition();
+          this.changeTooltipClass('bottom');
+      }
+    }
+  }
  
+  changeTooltipClass(replacePlacement){
+    this.renderer.removeClass(this.tooltip, `ng-tooltip-${replacePlacement}`);
+    this.renderer.addClass(this.tooltip, `ng-tooltip-${this.placement}`);
+  }
   show() {
     this.create();
     this.setPosition();
